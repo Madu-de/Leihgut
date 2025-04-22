@@ -1,0 +1,17 @@
+services:
+  leihgut-database:
+    container_name: leihgut-database
+    image: postgres:17.4-alpine3.21
+    restart: always
+    environment:
+      POSTGRES_USER: ${LEIHGUT_BACKEND_DATABASE_USER}
+      POSTGRES_PASSWORD: ${LEIHGUT_BACKEND_DATABASE_PASSWORD}
+      POSTGRES_DB: ${LEIHGUT_BACKEND_DATABASE_NAME}
+    ports:
+      - 5432:5432
+  leihgut-adminer:
+    container_name: leihgut-adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

@@ -1,0 +1,17 @@
+{
+  "name": "@leihgut/base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devp": "concurrently -n db,frontend,backend -c red,blue,green \"docker compose -f docker-compose.dev.yml up\" \"pnpm --filter frontend start\" \"pnpm --filter backend start:dev\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Madu-de",
+  "license": "ISC",
+  "packageManager": "pnpm@10.9.0",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
