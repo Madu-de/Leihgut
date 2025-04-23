@@ -6,4 +6,4 @@ RUN pnpm install
 RUN pnpm --filter frontend build
 
 FROM nginx:alpine
-COPY --from=builder app/apps/frontend/dist/frontend /usr/share/nginx/html
+COPY --from=builder app/apps/frontend/dist/frontend/browser /usr/share/nginx/html
