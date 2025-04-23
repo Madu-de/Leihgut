@@ -1,7 +1,8 @@
 FROM node:23-slim
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-CMD ["npm", "run", "start:prod"]
+COPY ../../. .
+RUN npm install -g pnpm
+RUN pnpm install
+RUN pnpm --filter backend build
+WORKDIR /app/apps/backend/
+CMD ["pnpm", "start:prod"]

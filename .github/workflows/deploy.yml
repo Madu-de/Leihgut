@@ -13,7 +13,6 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Deploy to Server via SSH
-      if: secrets.SSH_HOST && secrets.SSH_USER && secrets.SSH_KEY && secrets.APP_PATH && secrets.EMAIL && secrets.DOMAIN
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.SSH_HOST }}
@@ -24,16 +23,6 @@ jobs:
           git pull origin main
 
           sed "s/__DOMAIN__/${{ secrets.DOMAIN }}/g" default.conf > default.conf
-
-          if [ ! -f certbot/conf/live/${{ secrets.DOMAIN }}/fullchain.pem ]; then
-            docker compose run --rm leihgut-certbot certonly \
-              --webroot \
-              --webroot-path=/var/www/certbot \
-              --email ${{ secrets.EMAIL }} \
-              --agree-tos \
-              --no-eff-email \
-              -d ${{ secrets.DOMAIN }}
-          fi
 
           docker compose down
           docker compose up --build -d

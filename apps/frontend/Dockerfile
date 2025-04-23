@@ -1,9 +1,9 @@
 FROM node:23-slim AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+COPY ../../. .
+RUN npm install -g pnpm
+RUN pnpm install
+RUN pnpm --filter frontend build
 
 FROM nginx:alpine
-COPY --from=builder /app/dist/frontend /usr/share/nginx/html
+COPY --from=builder app/apps/frontend/dist/frontend /usr/share/nginx/html
