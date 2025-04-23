@@ -9,7 +9,7 @@ echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Load env variables
 
 set -a && source .env && set +a
 
-echo -e "LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Delete /dist if exists${Color_Off}"
+echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Delete /dist if exists${Color_Off}"
 
 if [ -d dist ]; then
   rm -rf dist
@@ -28,9 +28,8 @@ echo -e "${Cyan}LEIHUGT ${Green}[INFO]${Color_Off} | ${Purple}Start application$
 
 docker compose -f docker-compose.prod.yml up --build -d
 
-echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Now lets get us the certificate with certbot!${Color_Off}"
-
 if [ ! -f certbot/conf/live/$LEIHGUT_LETS_ENCRYPT_DOMAIN/fullchain.pem ]; then
+  echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Now lets get us the certificate with certbot!${Color_Off}"
   docker compose -f docker-compose.prod.yml run --rm leihgut-certbot certonly \
       --webroot \
       --webroot-path /var/www/certbot \
