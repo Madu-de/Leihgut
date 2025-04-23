@@ -20,9 +20,11 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           cd ${{ secrets.APP_PATH }}
+          docker compose -f docker-compose.prod.yml down
+
+          git reset --hard HEAD
           git pull origin main
 
-          sed "s/__DOMAIN__/${{ secrets.DOMAIN }}/g" default.conf > default.conf
-
-          docker compose down
-          docker compose up --build -d
+          sudo chmod +x ./init.sh
+          
+          ./init.sh

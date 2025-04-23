@@ -47,10 +47,11 @@ echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Restart proxy to u
 
 docker compose -f docker-compose.prod.yml restart leihgut-proxy
 
-echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Create cronjob for renew certificate${Color_Off}"
-
-echo "0 3 */2 * * root docker compose -f $(pwd)/docker-compose.prod.yml run --rm leihgut-certbot sh -c 'certbot renew --webroot -w /var/www/certbot --quiet' && docker compose -f $(pwd)/docker-compose.prod.yml exec -T leihgut-proxy nginx -s reload" > /etc/cron.d/leihgut-certbot-renew
-chmod 644 /etc/cron.d/leihgut-certbot-renew
+if [ ! -f /etc/cron.d/leihgut-certbot-renew ]; then
+  echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Create cronjob for renew certificate${Color_Off}"
+  echo "0 3 */2 * * root docker compose -f $(pwd)/docker-compose.prod.yml run --rm leihgut-certbot sh -c 'certbot renew --webroot -w /var/www/certbot --quiet' && docker compose -f $(pwd)/docker-compose.prod.yml exec -T leihgut-proxy nginx -s reload" > /etc/cron.d/leihgut-certbot-renew
+  chmod 644 /etc/cron.d/leihgut-certbot-renew
+fi
 
 echo -e "${Cyan}
        o                 o
