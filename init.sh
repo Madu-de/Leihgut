@@ -9,7 +9,7 @@ echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Load env variables
 
 set -a && source .env && set +a
 
-echo "LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Delete /dist if exists${Color_Off}"
+echo -e "LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Delete /dist if exists${Color_Off}"
 
 if [ -d dist ]; then
   rm -rf dist
@@ -53,7 +53,7 @@ echo -e "${Cyan}LEIHGUT ${Green}[INFO]${Color_Off} | ${Purple}Create cronjob for
 echo "0 3 */2 * * root docker compose -f $(pwd)/docker-compose.prod.yml run --rm leihgut-certbot sh -c 'certbot renew --webroot -w /var/www/certbot --quiet' && docker compose -f $(pwd)/docker-compose.prod.yml exec -T leihgut-proxy nginx -s reload" > /etc/cron.d/leihgut-certbot-renew
 chmod 644 /etc/cron.d/leihgut-certbot-renew
 
-echo "${Cyan}
+echo -e "${Cyan}
        o                 o
                   o
          o   ______      o
