@@ -38,7 +38,6 @@ services:
   leihgut-certbot:
     container_name: leihgut-certbot
     image: certbot/certbot
-    entrypoint: ""
     volumes:
       - ./certbot/www:/var/www/certbot
       - ./certbot/conf:/etc/letsencrypt
