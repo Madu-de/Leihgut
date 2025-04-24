@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devp": "concurrently -n db,frontend,backend -c red,blue,green \"docker compose -f docker-compose.dev.yml up\" \"pnpm --filter frontend start\" \"pnpm --filter backend start:dev\"",
+    "devp": "concurrently -n db,frontend,backend -c red,blue,green \"docker compose -f docker-compose.dev.yml up\" \"pnpm --filter frontend pre-build && pnpm --filter frontend start\" \"pnpm --filter backend start:dev\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
